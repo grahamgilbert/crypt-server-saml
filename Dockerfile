@@ -9,5 +9,5 @@ RUN apt-get update && apt-get install -y python-setuptools python-dev libxmlsec1
 # ADD run-dev.sh /run-dev.sh
 ADD attribute-maps /home/app/crypt/fvserver/attribute-maps
 RUN mv /home/app/crypt/fvserver/urls.py /home/app/crypt/fvserver/origurls.py \
-    && python /home/app/crypt/manage.py makemigrations \
+    && python /home/app/crypt/manage.py makemigrations
 ADD urls.py /home/app/crypt/fvserver/urls.py
