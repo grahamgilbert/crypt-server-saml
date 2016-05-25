@@ -1,4 +1,4 @@
-# Django settings for sal project.
+# Django settings for Crypt project.
 from settings_import import ADMINS, TIME_ZONE, LANGUAGE_CODE, ALLOWED_HOSTS, DISPLAY_NAME, DEBUG
 from system_settings import *
 from os import path
