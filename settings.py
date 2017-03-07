@@ -82,7 +82,7 @@ SAML_CONFIG = {
   'entityid': 'http://YOU/saml2/metadata/',
 
   # directory with attribute mapping
-  'attribute_map_dir': path.join(BASEDIR, 'attribute-maps'),
+  'attribute_map_dir': path.join(BASEDIR, 'attributemaps'),
 
   # this block states what services we provide
   'service': {
