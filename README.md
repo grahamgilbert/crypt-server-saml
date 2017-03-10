@@ -28,4 +28,13 @@ docker run -d --name="crypt" \
 macadmins/crypt-server-saml:2.2.0
 ```
 
+### Notes on OneLogin
+Your Onelogin `Configuration` should have the minimum settings
+- `Recipient` Ex: https://crypt.domain.tld/saml2/acs/
+- `ACS (Consumer) URL Validator` Ex: .*
+- `ACS (Consumer) URL`Ex: https://crypt.domain.tld/saml/acs/
+
+You will also need to configure your `Parameters` section with the custom iDP Fields/Values.
+- Ensure these fields are passed in the SAML Assertion
+
 For more information on what to put in your settings.py, look at https://github.com/knaperek/djangosaml2
