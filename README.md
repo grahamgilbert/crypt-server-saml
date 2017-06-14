@@ -3,6 +3,8 @@ A Docker container for Crypt Server that uses SAML
 
 You will almost certainly need to edit `settings.py` and provide your own metadata.xml file from your SAML provider.
 
+_The following instructions are provided as a best effort to help get started. They might require modifications to meet specific environments._
+
 ## settings.py changes you will certainly need to make
 - `SAML_ATTRIBUTE_MAPPING` (These values come from OpenLDAP, Active Directory, etc)
 - `SAML_CONFIG`
@@ -29,13 +31,31 @@ macadmins/crypt-server-saml:2.2.0
 ```
 
 ## Notes on OneLogin
-Your Onelogin `Configuration` should have the minimum settings
-- `Recipient` Ex: https://crypt.example.com/saml2/acs/
-- `ACS (Consumer) URL Validator` Ex: .*
-- `ACS (Consumer) URL`Ex: https://crypt.example.com/saml/acs/
+1. In the OneLogin admin portal click on Apps > Add Apps.
+1. Search for `SAML Test Connector (IdP)`. Click on this option.
+1. Give the application a display name, upload a icon if you wish, and then click save.
+1. Under "Configuration" tab, you will need at least the minimum settings shown below:
+    * `Recipient`: https://crypt.example.com/saml2/acs/
+    * `ACS (Consumer) URL Validator`: .*  (Note this is a period followed by an asterisk)
+    * `ACS (Consumer) URL`: https://crypt.example.com/saml2/acs/
+1. Under the "Parameters" tab, you will need to add the custom iDP Fields/Values. The process looks like:
+    * Click "Add parameter"
+      - `Field name`: FIELD_NAME
+      - `Flags`: Check the Include in SAML assertion
+    * Now click on the created field and set the appropriate FIELD_VALUE based on the table below.
 
-You will also need to configure your `Parameters` section with the custom iDP Fields/Values.
-- Ensure these fields are passed in the SAML Assertion
+    Repeat the above steps for all required fields:
+
+    | **FIELD_NAME** | **FIELD_VALUE**   |
+    |-----------|--------------|
+    | urn:mace:dir:attribute-def:cn   | First Name      |
+    | urn:mace:dir:attribute-def:sn   | Last Name       |
+    | urn:mace:dir:attribute-def:mail | Email           |
+    | urn:mace:dir:attribute-def:uid  | Email name part |
+
+1. Under the "SSO" tab, download the "Issuer URL" metadata file. This will be mounted in your docker container [(see above)](#an-example-docker-run).
+1. Under the "SSO" tab, you will find the "SAML 2.0 Endpoint" and "SLO Endpoint" which will go into the `settings.py` > `idp` section.
+1. Lastly, "Save" the SAML Test Connector (IdP).
 
 
 ## Notes on Okta
@@ -52,7 +72,7 @@ Okta has a slightly different implementation and a few of the tools that this co
 
     Single sign on URL: **https://crypt.example.com/saml2/acs/**
     Use this for Recipient URL and Destination URL: **Checked**
-    Allow this app to request other SSO URLs: **Unchecked**
+    Allow this app to request other SSO URLs: **Unchecked** (If this option is available)
     Audience URI (SP Entity ID): **https://crypt.example.com/saml2/metadata/**
     Default RelayState:
     Default RelayState: **Unspecified**
