@@ -23,7 +23,7 @@ Please note that this docker run is **incomplete**, but shows where to pass the 
 docker run -d --name="crypt" \
 -p 80:8000 \
 -v /yourpath/metadata.xml:/home/docker/crypt/fvserver/metadata.xml \
--v /yourpath/settings.py:/home/docker/crypt/fvserver//settings.py \
+-v /yourpath/settings.py:/home/docker/crypt/fvserver/settings.py \
 --restart="always" \
 macadmins/crypt-server-saml:2.2.0
 ```
