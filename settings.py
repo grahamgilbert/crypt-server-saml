@@ -1,5 +1,5 @@
 # Django settings for Crypt project.
-from settings_import import ADMINS, TIME_ZONE, LANGUAGE_CODE, ALLOWED_HOSTS, DISPLAY_NAME, DEBUG
+from settings_import import *
 from system_settings import *
 from os import path
 import saml2
@@ -78,7 +78,7 @@ SAML_CONFIG = {
   'xmlsec_binary': '/usr/bin/xmlsec1',
 
   # your entity id, usually your subdomain plus the url to the metadata view
-  'entityid': 'http://YOU/saml2/metadata/',
+  'entityid': 'https://crypt.example.com/saml2/metadata/',
 
   # directory with attribute mapping
   'attribute_map_dir': path.join(BASEDIR, 'attributemaps'),
@@ -97,16 +97,16 @@ SAML_CONFIG = {
               # url and binding to the assetion consumer service view
               # do not change the binding or service name
               'assertion_consumer_service': [
-                  ('http://YOU/saml2/acs/',
+                  ('https://crypt.example.com/saml2/acs/',
                    saml2.BINDING_HTTP_POST),
                   ],
               # url and binding to the single logout service view
               # do not change the binding or service name
               'single_logout_service': [
-                  ('http://YOU/saml2/ls/',
+                  ('https://crypt.example.com/saml2/ls/',
                    saml2.BINDING_HTTP_REDIRECT),
 
-                  ('http://YOU/saml2/ls/post',
+                  ('https://crypt.example.com/saml2/ls/post',
                    saml2.BINDING_HTTP_POST),
                   ],
               },
