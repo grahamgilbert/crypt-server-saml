@@ -125,7 +125,7 @@ SAML_CONFIG = {
               # present in our metadata
 
               # the keys of this dictionary are entity ids
-              'https://YOURID:' {
+              'https://YOURID': {
                   'single_sign_on_service': {
                       saml2.BINDING_HTTP_REDIRECT: 'https://YOURSSOURL',
                       },
