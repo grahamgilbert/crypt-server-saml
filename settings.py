@@ -1,11 +1,12 @@
 # Django settings for Crypt project.
-from settings_import import ADMINS, TIME_ZONE, LANGUAGE_CODE, ALLOWED_HOSTS, DISPLAY_NAME, DEBUG
-from system_settings import *
+from settings_import import *
+# from system_settings import *  # Not currently implemented with Crypt
 from os import path
 import saml2
 from saml2.saml import NAMEID_FORMAT_PERSISTENT
 import logging
 import sys
+import os
 
 PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir))
 
@@ -40,7 +41,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(PROJECT_DIR, 'db/sal.db'),                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(PROJECT_DIR, 'db/crypt.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -53,11 +54,11 @@ host = None
 port = None
 
 if os.environ.has_key('DB_HOST'):
-    host = os.environ('DB_HOST')
+    host = os.environ.get('DB_HOST')
     port = os.environ.get('DB_PORT')
 
 elif os.environ.has_key('DB_PORT_5432_TCP_ADDR'):
-    host = os.environ('DB_PORT_5432_TCP_ADDR')
+    host = os.environ.get('DB_PORT_5432_TCP_ADDR')
     port = os.environ.get('DB_PORT_5432_TCP_PORT', '5432')
 
 if host and port:
@@ -78,7 +79,7 @@ SAML_CONFIG = {
   'xmlsec_binary': '/usr/bin/xmlsec1',
 
   # your entity id, usually your subdomain plus the url to the metadata view
-  'entityid': 'http://YOU/saml2/metadata/',
+  'entityid': 'https://crypt.example.com/saml2/metadata/',
 
   # directory with attribute mapping
   'attribute_map_dir': path.join(BASEDIR, 'attributemaps'),
@@ -97,16 +98,16 @@ SAML_CONFIG = {
               # url and binding to the assetion consumer service view
               # do not change the binding or service name
               'assertion_consumer_service': [
-                  ('http://YOU/saml2/acs/',
+                  ('https://crypt.example.com/saml2/acs/',
                    saml2.BINDING_HTTP_POST),
                   ],
               # url and binding to the single logout service view
               # do not change the binding or service name
               'single_logout_service': [
-                  ('http://YOU/saml2/ls/',
+                  ('https://crypt.example.com/saml2/ls/',
                    saml2.BINDING_HTTP_REDIRECT),
 
-                  ('http://YOU/saml2/ls/post',
+                  ('https://crypt.example.com/saml2/ls/post',
                    saml2.BINDING_HTTP_POST),
                   ],
               },
@@ -124,7 +125,7 @@ SAML_CONFIG = {
               # present in our metadata
 
               # the keys of this dictionary are entity ids
-              'https://YOURID: {
+              'https://YOURID': {
                   'single_sign_on_service': {
                       saml2.BINDING_HTTP_REDIRECT: 'https://YOURSSOURL',
                       },
