@@ -90,7 +90,7 @@ SAML_CONFIG = {
       'sp' : {
           'authn_requests_signed': False,
           "allow_unsolicited": True,
-          'want_assertions_signed': False,
+          'want_assertions_signed': True,
           'allow_unknown_attributes': True,
           'name': 'Federated Django sample SP',
           'name_id_format': NAMEID_FORMAT_PERSISTENT,
