@@ -1,4 +1,4 @@
-FROM macadmins/crypt-server:latest
+FROM macadmins/crypt-server:2.3.2
 MAINTAINER Graham Gilbert <graham@grahamgilbert.com>
 ENV DJANGO_SAML_VERSION 0.16.11
 
