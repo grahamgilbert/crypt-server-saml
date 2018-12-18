@@ -38,7 +38,7 @@ cmd = [
     'docker',
     'build',
     '-t',
-    'macadmins/sal-saml:{}'.format(tag),
+    'macadmins/crypt-server-saml:{}'.format(tag),
     '.'
 ]
 
@@ -61,7 +61,7 @@ except subprocess.CalledProcessError:
 cmd = [
     'docker',
     'push',
-    'macadmins/sal-saml:{}'.format(tag)
+    'macadmins/crypt-server-saml:{}'.format(tag)
 ]
 
 print(subprocess.check_output(cmd))
