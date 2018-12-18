@@ -26,7 +26,7 @@ RUN apk add --no-cache --virtual .build-deps \
     && pip install --no-cache-dir git+git://github.com/francoisfreitag/djangosaml2.git@613356c7f0e18ecfde07e4d282d0b82b0f4f7268 \
     && runDeps="$( \
             scanelf --needed --nobanner --recursive /venv \
-                    | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+                    | awk '{ gsub(/,/, \"\nso:", $2); print \"so:\" $2 }' \
                     | sort -u \
                     | xargs -r apk info --installed \
                     | sort -u \
