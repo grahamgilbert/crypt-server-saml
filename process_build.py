@@ -14,6 +14,8 @@ if tag == '':
         tag = 'latest'
     else:
         tag = os.getenv('CIRCLE_BRANCH')
+
+print(tag)
 dockerfile_content = """FROM macadmins/crypt-server:{}
 MAINTAINER Graham Gilbert <graham@grahamgilbert.com>
 ENV DJANGO_SAML_VERSION 0.16.11
