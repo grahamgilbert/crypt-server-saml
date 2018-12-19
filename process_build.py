@@ -7,13 +7,13 @@ import os
 # parser.add_argument('tag', nargs='?', default='')
 # args = parser.parse_args()
 
-tag = os.getenv('TAG', '')
+tag = os.getenv("TAG", "")
 
-if tag == '':
-    if os.getenv('CIRCLE_BRANCH') == 'master':
-        tag = 'latest'
+if tag == "":
+    if os.getenv("CIRCLE_BRANCH") == "master":
+        tag = "latest"
     else:
-        tag = os.getenv('CIRCLE_BRANCH')
+        tag = os.getenv("CIRCLE_BRANCH")
 
 print(tag)
 dockerfile_content = """FROM macadmins/crypt-server:{}
@@ -29,39 +29,31 @@ COPY attributemaps /home/app/crypt/fvserver/attributemaps
 RUN mv /home/app/crypt/fvserver/urls.py /home/app/crypt/fvserver/origurls.py
 COPY urls.py /home/app/crypt/fvserver/urls.py
 
-""".format(tag)
+""".format(
+    tag
+)
 
 with open("Dockerfile", "w") as dockerfile:
     dockerfile.write(dockerfile_content)
 
-cmd = [
-    'docker',
-    'build',
-    '-t',
-    'macadmins/crypt-server-saml:{}'.format(tag),
-    '.'
-]
+cmd = ["docker", "build", "-t", "macadmins/crypt-server-saml:{}".format(tag), "."]
 
 print(subprocess.check_output(cmd))
 
 cmd = [
-    'docker',
-    'login',
-    '-u',
-    '{}'.format(os.getenv('DOCKER_USER')),
-    '-p',
-    '{}'.format(os.getenv('DOCKER_PASS'))
+    "docker",
+    "login",
+    "-u",
+    "{}".format(os.getenv("DOCKER_USER")),
+    "-p",
+    "{}".format(os.getenv("DOCKER_PASS")),
 ]
 
 try:
     print(subprocess.check_output(cmd))
 except subprocess.CalledProcessError:
-    print('Failed to login to docker')
+    print("Failed to login to docker")
 
-cmd = [
-    'docker',
-    'push',
-    'macadmins/crypt-server-saml:{}'.format(tag)
-]
+cmd = ["docker", "push", "macadmins/crypt-server-saml:{}".format(tag)]
 
 print(subprocess.check_output(cmd))
