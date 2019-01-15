@@ -1,6 +1,6 @@
 # Django settings for Crypt project.
-from fvserver.settings_import import *
 from fvserver.system_settings import *
+from fvserver.settings_import import *
 from os import path
 import saml2
 from saml2.saml import NAMEID_FORMAT_PERSISTENT
