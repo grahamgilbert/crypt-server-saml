@@ -21,6 +21,15 @@ SAML_ATTRIBUTE_MAPPING = {
     "cn": ("first_name",),
     "sn": ("last_name",),
 }
+# Edit these lists to include the names of groups that should get
+# the access levels below. See server/signals.py for more details.
+# Leave blank to disable the group-based permissions feature.
+SAML_ACTIVE_GROUPS = []
+SAML_STAFF_GROUPS = []
+SAML_SUPERUSER_GROUPS = []
+# Edit to match the attribute name used in your SAML assertions for
+# group membership information.
+SAML_GROUPS_ATTRIBUTE = 'memberOf'
 
 if DEBUG == True:
 
