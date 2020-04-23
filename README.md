@@ -98,6 +98,56 @@ Okta has a slightly different implementation and a few of the tools that this co
 
 Now that Okta is setup you will need to modify your settings.py to match. Note if you used the Attribute Statements above you should not have to modify the `SAML_ATTRIBUTE_MAPPING` variable. The metadata file can be downloaded from the Application's "Sign On" tab > Settings > SAML 2.0 > "Identity Provider metadata" link. The `idp` URLs are found under the "Sign On" > Settings > SAML 2.0 > "View Setup Instructions" button.
 
+## Notes on Azure AD
+1. Create a new Enterprise application. Choose "Non-gallery application"
+1. Under "Single sign-on", choose SAML.
+1. Set "Basic SAML Configuration" to:
+
+    | **Name** | **Value** |
+    |----------|-----------|
+    | Identifier (Entity ID)                     | https://crypt.example.com/saml2/metadata/ |
+    | Reply URL (Assertion Consumer Service URL) | https://crypt.example.com/saml2/acs/      |
+    | Sign on URL                                | https://crypt.example.com/saml2/login/    |
+    | Relay State                                | Optional                                  |
+    | Logout Url                                 | https://crypt.example.com/saml2/ls        |
+
+    Set the "Clain name" name identifier format to "Persistent".
+
+1. Set "User Attributes & Claims" to:
+
+    | **Claim name** | **Value** |
+    |----------------|-----------|
+    | urn:oid:2.5.4.42                  | user.givenname         |
+    | urn:oid:0.9.2342.19200300.100.1.1 | user.userprincipalname |
+    | urn:oid:2.5.4.4                   | user.surname           |
+    | urn:oid:0.9.2342.19200300.100.1.3 | user.mail              |
+    | Unique User Identifier            | user.userprincipalname |
+
+1. Set the attribute mapping in settings.py to:
+
+    ```
+    SAML_ATTRIBUTE_MAPPING = {
+        'uid': ('username', ),
+        'mail': ('email', ),
+        'givenName': ('first_name', ),
+        'sn': ('last_name', ),
+    }
+    ```
+ 1. Set the id section in settings.py to:
+
+    ```
+           'idp': {
+              'https://sts.windows.net/[tenantId]': {
+                  'single_sign_on_service': {
+                      saml2.BINDING_HTTP_REDIRECT: 'https://login.microsoftonline.com/[tenantId]/saml2',
+                      },
+                  'single_logout_service': {
+                      saml2.BINDING_HTTP_REDIRECT: 'https://login.microsoftonline.com/[tenantId]/saml2',
+                      },
+                  },
+              },
+    ```
+
 # Help
 
 For more information on what to put in your settings.py, look at https://github.com/knaperek/djangosaml2
