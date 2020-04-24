@@ -21,6 +21,15 @@ SAML_ATTRIBUTE_MAPPING = {
     "cn": ("first_name",),
     "sn": ("last_name",),
 }
+# Edit these lists to include the names of groups that should get
+# the access levels below. See server/signals.py for more details.
+# Leave blank to disable the group-based permissions feature.
+SAML_ACTIVE_GROUPS = []
+SAML_STAFF_GROUPS = []
+SAML_SUPERUSER_GROUPS = []
+# Edit to match the attribute name used in your SAML assertions for
+# group membership information.
+SAML_GROUPS_ATTRIBUTE = 'memberOf'
 
 if DEBUG == True:
 
@@ -85,6 +94,9 @@ SAML_CONFIG = {
     "entityid": "https://crypt.example.com/saml2/metadata/",
     # directory with attribute mapping
     "attribute_map_dir": path.join(BASEDIR, "attributemaps"),
+    # Allow SAML assertions to contain attributes not specified in the
+    # attributemaps.
+    'allow_unknown_attributes': True,
     # this block states what services we provide
     "service": {
         # we are just a lonely SP
