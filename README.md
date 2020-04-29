@@ -28,8 +28,8 @@ To take advantage of this, edit the settings.py to include these preferences:
 
 For example:
 ```
-SAML_READ_ONLY_GROUPS = ['cn=regular_shorts_wearers,ou=memberOf,dc=blutwurst,dc=com', 'cn=nontraditional_pants_krew,ou=memberOf,dc=blutwurst,dc=com']
-SAML_GLOBAL_ADMIN_GROUPS` = ['cn=lederhosen_club,ou=memberOf,dc=blutwurst,dc=com']
+SAML_ACTIVE_GROUPS = ['cn=anonymous_henchmen,ou=memberOf,dc=lopan,dc=com', 'cn=cleaning_crew,ou=memberOf,dc=lopan,dc=com']
+SAML_SUPERUSER_GROUPS` = ['cn=threestorms,ou=memberOf,dc=lopan,dc=com']
 ```
 
 ## An example Docker run
