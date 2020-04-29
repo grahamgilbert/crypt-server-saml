@@ -17,6 +17,21 @@ _The following instructions are provided as a best effort to help get started. T
     - `single_sign_on_service` Ex: https://apps.onelogin.com/trust/saml2/http-post/sso/1234567890
     - `single_logout_service` Ex: https://apps.onelogin.com/trust/saml2/http-redirect/slo/1234567890
 
+## Using groups in the SAML assertion to assign Crypt permissions
+crypt-server-saml adds a Django signal callback to act on group membership information passed in a SAML assertion during login. If you can configure your IdP to add group information, you can use it to automate the addition and revocation of permissions.
+
+To take advantage of this, edit the settings.py to include these preferences:
+- `SAML_GROUPS_ATTRIBUTE`: Default (`memberOf`) The assertion dict's key for the group membership attribute.
+- `SAML_ACTIVE_GROUPS`: Default `[]` (empty list) List of groups who should be considered active by Django's builtin auth system.
+- `SAML_STAFF_GROUPS`: Default `[]` (empty list) List of groups who should be given "staff" permission. This grants access to the Django admin site. Staff-members are also granted the "active" attribute.
+- `SAML_SUPERUSER_GROUPS` Default `[]` (empty list) List of groups who should be given superuser status. Superusers are also granted the "active" and "staff" attributes.
+
+For example:
+```
+SAML_READ_ONLY_GROUPS = ['cn=regular_shorts_wearers,ou=memberOf,dc=blutwurst,dc=com', 'cn=nontraditional_pants_krew,ou=memberOf,dc=blutwurst,dc=com']
+SAML_GLOBAL_ADMIN_GROUPS` = ['cn=lederhosen_club,ou=memberOf,dc=blutwurst,dc=com']
+```
+
 ## An example Docker run
 
 Please note that this docker run is **incomplete**, but shows where to pass the `metadata.xml` and `settings.py`
