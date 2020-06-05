@@ -5,17 +5,17 @@ ENV DJANGO_SAML_VERSION 0.16.11
 RUN apk add --no-cache --virtual .build-deps \
     xmlsec-dev xmlsec git gcc libc-dev \
     && pip install --no-cache-dir --upgrade setuptools \
-    && pip install --no-cache-dir git+git://github.com/francoisfreitag/djangosaml2.git@613356c7f0e18ecfde07e4d282d0b82b0f4f7268
-    # \
-    # && runDeps="$( \
-    #         scanelf --needed --nobanner --recursive /venv \
-    #                 | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
-    #                 | sort -u \
-    #                 | xargs -r apk info --installed \
-    #                 | sort -u \
-    # )" \
-    # && apk add --virtual .python-rundeps $runDeps \
-    # && apk del .build-deps
+    && pip install --no-cache-dir git+git://github.com/knaperek/djangosaml2.git@ef59c7c7096ee32e6ce75ef42af7c01639dc6dbc
+# \
+# && runDeps="$( \
+#         scanelf --needed --nobanner --recursive /venv \
+#                 | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+#                 | sort -u \
+#                 | xargs -r apk info --installed \
+#                 | sort -u \
+# )" \
+# && apk add --virtual .python-rundeps $runDeps \
+# && apk del .build-deps
 
 COPY attributemaps /home/app/crypt/fvserver/attributemaps
 RUN mv /home/app/crypt/fvserver/urls.py /home/app/crypt/fvserver/origurls.py
