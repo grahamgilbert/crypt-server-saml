@@ -5,7 +5,7 @@ ENV DJANGO_SAML_VERSION 0.16.11
 RUN apk add --no-cache --virtual .build-deps \
     xmlsec-dev xmlsec git gcc libc-dev \
     && pip install --no-cache-dir --upgrade setuptools \
-    && pip install --no-cache-dir git+git://github.com/knaperek/djangosaml2.git@ef59c7c7096ee32e6ce75ef42af7c01639dc6dbc
+    && RUN pip install djangosaml2==0.18.1
 # \
 # && runDeps="$( \
 #         scanelf --needed --nobanner --recursive /venv \
