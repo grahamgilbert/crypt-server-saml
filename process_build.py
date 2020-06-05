@@ -23,7 +23,7 @@ ENV DJANGO_SAML_VERSION 0.16.11
 RUN apk add --no-cache --virtual .build-deps \
     xmlsec-dev xmlsec git gcc libc-dev \
     && pip install --no-cache-dir --upgrade setuptools \
-    && pip install --no-cache-dir git+git://github.com/francoisfreitag/djangosaml2.git@613356c7f0e18ecfde07e4d282d0b82b0f4f7268
+    && pip install djangosaml2==0.18.1
 
 COPY attributemaps /home/app/crypt/fvserver/attributemaps
 RUN mv /home/app/crypt/fvserver/urls.py /home/app/crypt/fvserver/origurls.py
