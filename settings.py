@@ -29,7 +29,7 @@ SAML_STAFF_GROUPS = []
 SAML_SUPERUSER_GROUPS = []
 # Edit to match the attribute name used in your SAML assertions for
 # group membership information.
-SAML_GROUPS_ATTRIBUTE = 'memberOf'
+SAML_GROUPS_ATTRIBUTE = "memberOf"
 
 if DEBUG == True:
 
@@ -96,12 +96,13 @@ SAML_CONFIG = {
     "attribute_map_dir": path.join(BASEDIR, "attributemaps"),
     # Allow SAML assertions to contain attributes not specified in the
     # attributemaps.
-    'allow_unknown_attributes': True,
+    "allow_unknown_attributes": True,
     # this block states what services we provide
     "service": {
         # we are just a lonely SP
         "sp": {
             "authn_requests_signed": False,
+            "want_response_signed": False,
             "allow_unsolicited": True,
             "want_assertions_signed": True,
             "allow_unknown_attributes": True,
