@@ -6,8 +6,8 @@ from django.conf import settings
 
 
 ACTIVE_GROUPS = set(getattr(settings, 'SAML_ACTIVE_GROUPS', []))
-STAFF_GROUPS = set(getattr(settings, 'SAML_READ_ONLY_GROUPS', []))
-SUPERUSER_GROUPS = set(getattr(settings, 'SAML_READ_ONLY_GROUPS', []))
+STAFF_GROUPS = set(getattr(settings, 'SAML_STAFF_GROUPS', []))
+SUPERUSER_GROUPS = set(getattr(settings, 'SAML_SUPERUSER_GROUPS', []))
 GROUPS_ATTRIBUTE = getattr(settings, 'SAML_GROUPS_ATTRIBUTE', 'memberOf')
 
 
