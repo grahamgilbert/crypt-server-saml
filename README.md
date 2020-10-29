@@ -94,13 +94,12 @@ Okta has a slightly different implementation and a few of the tools that this co
 
    #### General
 
-   Single sign on URL: **https://crypt.example.com/saml2/acs/**
-   Use this for Recipient URL and Destination URL: **Checked**
-   Allow this app to request other SSO URLs: **Unchecked** (If this option is available)
-   Audience URI (SP Entity ID): **https://crypt.example.com/saml2/metadata/**
-   Default RelayState:
-   Default RelayState: **Unspecified**
-   Application username: **Okta username**
+   - Single sign on URL: **https://crypt.example.com/saml2/acs/**
+   - Use this for Recipient URL and Destination URL: **Checked**
+   - Allow this app to request other SSO URLs: **Unchecked** (If this option is available)
+   - Audience URI (SP Entity ID): **https://crypt.example.com/saml2/metadata/**
+   - Default RelayState: **Unspecified**
+   - Application username: **Okta username**
 
    #### Attribute Statements
 
