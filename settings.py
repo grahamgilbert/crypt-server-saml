@@ -12,6 +12,8 @@ PROJECT_DIR = os.path.abspath(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir)
 )
 
+MIDDLEWARE.append('djangosaml2.middleware.SamlSessionMiddleware')
+
 SAML_DJANGO_USER_MAIN_ATTRIBUTE = "email"
 SAML_USE_NAME_ID_AS_USERNAME = True
 SAML_CREATE_UNKNOWN_USER = True
