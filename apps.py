@@ -5,4 +5,4 @@ class ServerAppConfig(AppConfig):
     name = "server"
 
     def ready(self):
-        import server.signals
+        import server.backends
