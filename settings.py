@@ -48,7 +48,7 @@ if DEBUG == True:
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    "djangosaml2.backends.Saml2Backend",
+    "server.backends.CustomAttributesBackend",
 )
 
 DATABASES = {
