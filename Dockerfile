@@ -1,4 +1,5 @@
-FROM macadmins/crypt-server:latest
+ARG BASE_TAG=latest
+FROM macadmins/crypt-server:${BASE_TAG}
 
 RUN apk add --no-cache --virtual .build-deps \
     xmlsec-dev xmlsec git gcc libc-dev libpq \
