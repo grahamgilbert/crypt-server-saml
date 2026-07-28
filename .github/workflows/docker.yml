@@ -12,7 +12,7 @@ on:
         default: latest
 
 env:
-  TAG: ${{ github.event.client_payload.tag || inputs.tag }}
+  TAG: ${{ github.event.client_payload.tag || github.event.inputs.tag }}
 
 jobs:
   build:
