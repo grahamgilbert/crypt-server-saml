@@ -8,7 +8,6 @@ on:
     inputs:
       tag:
         description: "Tag of macadmins/crypt-server to build from, and to publish as"
-        required: true
         default: latest
 
 env:
@@ -35,4 +34,4 @@ jobs:
           build-args: BASE_TAG=${{ env.TAG }}
           tags: macadmins/crypt-server-saml:${{ env.TAG }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: type=gha
